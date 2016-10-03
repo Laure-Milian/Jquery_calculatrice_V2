@@ -7,6 +7,7 @@
 	var operateur;
 	var resultat = 0;
 
+
 	function add(Number1, Number2) {
 		return Number1 + Number2;
 	}
@@ -34,7 +35,7 @@
 			for (i = 1; i < len; i++) {
 				Number1 = parseInt(Number1 + "" + TabNumber1[i], 10);
 			}
-		$("#Number1").html(Number1);
+			$("#Number1").html(Number1);
 
 		}
 		else {
@@ -45,7 +46,7 @@
 			for (i = 1; i < len; i++) {
 				Number2 = parseInt(Number2 + "" + TabNumber2[i], 10);
 			}
-		$("#Number2").html(Number2);
+			$("#Number2").html(Number2);
 		}
 
 	});
@@ -80,4 +81,18 @@
 		}
 
 	});
+
+	$("#reinitialiser").click(function() {
+		TabNumber1 = [];
+		Number1 = 0;
+		$("#Number1").html(Number1);
+		TabNumber2 = [];
+		Number2 = 0;
+		$("#Number2").html(Number2);
+		operateur = undefined;
+		$("#operation").html(" ");
+		resultat = 0;
+		$("#result").html(resultat);
+	});
+
 })();
