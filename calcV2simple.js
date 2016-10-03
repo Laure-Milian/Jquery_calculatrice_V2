@@ -24,50 +24,50 @@
 
 	$(".number").click(function() {
 		var number = $(this).data("type");
-		console.log(number);
 		
 		if (Number1 === undefined) {
 			Number1 = number;
-			console.log(Number1);
+			$("#Number1").html(Number1);
 		}
 
 		else {
 			Number2 = number;
-			console.log(Number2);
+			$("#Number2").html(Number2);
 		}
 	});
 
 
 	$(".operateur").click(function() {
 		operateur = $(this).data("type");
+		$("#operation").html(" " + operateur + " ");
 	});
 
 
 	$("#calculer").click(function calc() {
 
-		if (operateur === "add") {
+		if (operateur === "+") {
 			resultat = add(Number1, Number2);
 			$("#result").html(resultat);
 		}
 
-		else if (operateur === "substract") {
+		else if (operateur === "-") {
 			resultat = substract(Number1, Number2);
 			$("#result").html(resultat);
 		}
 
-		else if (operateur === "multiply") {
+		else if (operateur === "*") {
 			resultat = multiply(Number1, Number2);
 			$("#result").html(resultat);
 		}
 
-		else if (operateur === "divide") {
+		else if (operateur === "/") {
 			resultat = divide(Number1, Number2);
+			$("#result").html(resultat);
 		}
 
 
 	});
 
-	$("#result").html(resultat);
 
 
 
