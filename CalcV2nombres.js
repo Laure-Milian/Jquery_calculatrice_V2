@@ -15,6 +15,37 @@
 		}
 	};
 
+	var objApp = {
+		AppOperateur : function(e) {
+			var operateur = objKeysOperateurs["key" + e.keyCode];
+			$("#operation").html(operateur);	
+		} ,
+		AppNumbers : function (e) {
+			var number = objKeysNumbers["key" + e.keyCode];
+			var operateur = $("#operation").text();
+			if (!operateur) {
+				$("#nb1").append(number);
+			} else {
+				$("#nb2").append(number);
+			}
+		},
+		AppCalculer : function(e) {
+			var nb1 = parseInt(($("#nb1").text()), 10);
+			var nb2 = parseInt(($("#nb2").text()), 10);
+			var operateur = $("#operation").text();
+			if (operateur === "+") {
+				var resultat = Calculer["add"](nb1, nb2);
+			} else if (operateur === "-") {
+				var resultat = Calculer["substract"](nb1, nb2);
+			} else if (operateur === "*") {
+				var resultat = Calculer["multiply"](nb1, nb2);
+			} else if (operateur === "/") {
+				var resultat = Calculer["divide"](nb1, nb2);
+			}
+			$("#result").html(resultat);
+		},
+	}
+
 	var objKeysNumbers = {
 		key48 : 0,
 		key49 : 1,
@@ -35,50 +66,19 @@
 		key47 : "/"
 	};
 
-	$("html").on("keypress", function(e) {
-		var operateur = objKeysOperateurs["key" + e.keyCode];
-		$("#operation").html(operateur);
-	});
-
 
 	$("html").on("keypress", function(e) {
-		var number = objKeysNumbers["key" + e.keyCode];
-		var operateur = $("#operation").text();
-
-		if (!operateur) {
-			$("#nb1").append(number);
+		if (48 <= e.keyCode && e.keyCode <= 57) {
+			objApp["AppNumbers"](e);
 		}
-		else {
-			$("#nb2").append(number);
+		else if (42 <= e.keyCode && e.keyCode <= 47) {
+			objApp["AppOperateur"](e);
+		}
+		else if (e.keyCode === 13) {
+			objApp["AppCalculer"](e);
 		}
 	});
 
-	$("html").on("keypress", function(e) {
-		if (e.keyCode === 13) {
-			var nb1 = parseInt(($("#nb1").text()), 10);
-			var nb2 = parseInt(($("#nb2").text()), 10);
-			var operateur = $("#operation").text();
-
-			if (operateur === "+") {
-				var resultat = Calculer["add"](nb1, nb2);
-			}
-
-			else if (operateur === "-") {
-				var resultat = Calculer["substract"](nb1, nb2);
-			}
-
-			else if (operateur === "*") {
-				var resultat = Calculer["multiply"](nb1, nb2);
-			}
-
-			else if (operateur === "/") {
-				var resultat = Calculer["divide"](nb1, nb2);
-			}
-
-			$("#result").html(resultat);
-
-		}
-	});
 
 
 //au clic 
