@@ -1,98 +1,75 @@
 (function() { 
 
-	var TabNumber1 = [];
-	var Number1;
-	var TabNumber2 = [];
-	var Number2;
-	var operateur;
-	var resultat = 0;
 
-
-	function add(Number1, Number2) {
-		return Number1 + Number2;
+	function add(nb1, nb2) {
+		return nb1 + nb2;
 	}
 
-	function substract(Number1, Number2) {
-		return Number1 - Number2;
+	function substract(nb1, nb2) {
+		return nb1 - nb2;
 	}
 
-	function multiply(Number1, Number2) {
-		return Number1 * Number2;
+	function multiply(nb1, nb2) {
+		return nb1 * nb2;
 	}
 
-	function divide(Number1, Number2) {
-		return Number1 / Number2;
+	function divide(nb1, nb2) {
+		return nb1 / nb2;
 	}
 
 
 	$(".number").click(function() {
+		var number = $(this).data("type");
+		var operateur = $("#operation").text();
 
-		if (operateur === undefined) {
-			var number = $(this).data("type");
-			TabNumber1.push(number);
-			len = TabNumber1.length;
-			Number1 = TabNumber1[0];
-			for (i = 1; i < len; i++) {
-				Number1 = parseInt(Number1 + "" + TabNumber1[i], 10);
-			}
-			$("#Number1").html(Number1);
-
+		if (!operateur) {
+			$("#nb1").append(number);
 		}
 		else {
-			var number = $(this).data("type");
-			TabNumber2.push(number);
-			len = TabNumber2.length;
-			Number2 = TabNumber2[0];
-			for (i = 1; i < len; i++) {
-				Number2 = parseInt(Number2 + "" + TabNumber2[i], 10);
-			}
-			$("#Number2").html(Number2);
+			$("#nb2").append(number);
 		}
-
+		
 	});
 
 
 	$(".operateur").click(function() {
 		operateur = $(this).data("type");
-		$("#operation").html(" " + operateur + " ");
+		$("#operation").html(operateur);
 	});
 
 
 	$("#calculer").click(function calc() {
 
+		var nb1 = parseInt(($("#nb1").text()), 10);
+		var nb2 = parseInt(($("#nb2").text()), 10);
+		var operateur = $("#operation").text();
+
 		if (operateur === "+") {
-			resultat = add(Number1, Number2);
-			$("#result").html(resultat);
+			resultat = add(nb1, nb2);
 		}
 
 		else if (operateur === "-") {
-			resultat = substract(Number1, Number2);
-			$("#result").html(resultat);
+			resultat = substract(nb1, nb2);
 		}
 
 		else if (operateur === "*") {
-			resultat = multiply(Number1, Number2);
-			$("#result").html(resultat);
+			resultat = multiply(nb1, nb2);
 		}
 
 		else if (operateur === "/") {
-			resultat = divide(Number1, Number2);
-			$("#result").html(resultat);
+			resultat = divide(nb1, nb2);
 		}
 
+		$("#result").html(resultat);
+
 	});
 
-	$("#reinitialiser").click(function() {
-		TabNumber1 = [];
-		Number1 = 0;
-		$("#Number1").html(Number1);
-		TabNumber2 = [];
-		Number2 = 0;
-		$("#Number2").html(Number2);
-		operateur = undefined;
-		$("#operation").html(" ");
-		resultat = 0;
-		$("#result").html(resultat);
-	});
+	
+
+/*var KEY_1 = 49; ou objet keys.
+
+	$("").on("keypress", function(e) {
+		console.log(e.keyCode);
+	})*/
 
 })();
