@@ -1,21 +1,19 @@
 (function() { 
 
-
-	function add(nb1, nb2) {
-		return nb1 + nb2;
-	}
-
-	function substract(nb1, nb2) {
-		return nb1 - nb2;
-	}
-
-	function multiply(nb1, nb2) {
-		return nb1 * nb2;
-	}
-
-	function divide(nb1, nb2) {
-		return nb1 / nb2;
-	}
+	var Calculer = {
+		add : function(nb1, nb2) {
+			return nb1 + nb2;
+		},
+		substract : function(nb1, nb2) {
+			return nb1 - nb2;
+		},
+		multiply : function(nb1, nb2) {
+			return nb1 * nb2;
+		},
+		divide : function(nb1, nb2) {
+			return nb1 / nb2;
+		}
+	};
 
 
 	$(".number").click(function() {
@@ -28,12 +26,11 @@
 		else {
 			$("#nb2").append(number);
 		}
-		
 	});
 
 
 	$(".operateur").click(function() {
-		operateur = $(this).data("type");
+		var operateur = $(this).data("type");
 		$("#operation").html(operateur);
 	});
 
@@ -45,25 +42,31 @@
 		var operateur = $("#operation").text();
 
 		if (operateur === "+") {
-			resultat = add(nb1, nb2);
+			var resultat = Calculer["add"](nb1, nb2);
 		}
 
 		else if (operateur === "-") {
-			resultat = substract(nb1, nb2);
+			var resultat = Calculer["substract"](nb1, nb2);
 		}
 
 		else if (operateur === "*") {
-			resultat = multiply(nb1, nb2);
+			var resultat = Calculer["multiply"](nb1, nb2);
 		}
 
 		else if (operateur === "/") {
-			resultat = divide(nb1, nb2);
+			var resultat = Calculer["divide"](nb1, nb2);
 		}
 
 		$("#result").html(resultat);
 
 	});
 
+	$("#reinitialiser").on("click", function() { 
+		$("#nb1").text("");
+		$("#nb2").text("");
+		$("#operation").text("");
+		$("#result").text("");
+	});
 	
 
 /*var KEY_1 = 49; ou objet keys.
